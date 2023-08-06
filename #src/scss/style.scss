@@ -1,0 +1,649 @@
+@mixin font($font_name, $file_name, $weight, $style) {
+    @font-face {
+        font-family: $font_name;
+        font-display: swap;
+        src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+        font-weight: #{$weight};
+        font-style: #{$style};
+    }
+}
+
+//mixin for connect fonts
+
+@import "fonts";
+
+/*Обнуление*/
+*{padding:0;margin:0;border:0;}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+:focus,:active{outline:none;}
+a:focus,a:active{outline:none;}
+nav,footer,header,aside{display:block;}
+html,body{height:100%;width:100%;font-size:100%;line-height:1;font-size:14px;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
+input,button,textarea{font-family:inherit;}
+input::-ms-clear{display:none;}
+button{cursor:pointer;}
+button::-moz-focus-inner{padding:0;border:0;}
+a,a:visited{text-decoration:none;}
+a:hover{text-decoration:none;}
+ul li{list-style:none;}
+img{vertical-align:top;}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit;}
+/*--------------------*/
+
+
+$color1: #202124;
+$color2: #929292;
+$color3: #acacac;
+$color4: #b9b9b9;
+$color5: #ffffff;
+$color6: #ffffff;
+$color7: #59DB00;
+
+
+//====== Миксинчики ======
+
+
+
+// @mixin border-animation-withGenerator {
+
+//     background-image: 
+//         radial-gradient(circle at 100% 100%, transparent 50px, #d2272b 50px, #d2272b 54px, transparent 54px),
+//         linear-gradient(to right, #d2272b, #4d4dff),
+//         radial-gradient(circle at 0% 100%, transparent 50px, #4d4dff 50px, #4d4dff 54px, transparent 54px),
+//         linear-gradient(to bottom, #4d4dff, #44d62c),
+//         radial-gradient(circle at 0% 0%, transparent 50px, #44d62c 50px, #44d62c 54px, transparent 54px),
+//         linear-gradient(to left, #44d62c, #e0e722),
+//         radial-gradient(circle at 100% 0%, transparent 50px, #e0e722 50px, #e0e722 54px, transparent 54px), 
+//         linear-gradient(to top, #e0e722, #d2272b);
+//     background-size: 20px 20px, calc(100% - 40px) 5px, 20px 20px, 5px calc(100% - 40px);
+//     background-position: top left, top center, top right, center right, bottom right, bottom center, bottom left, center left;
+//     background-repeat: no-repeat;
+
+
+
+// }
+
+
+
+
+
+@mixin border-animation {
+    --border-width: 10px;
+    
+    position: relative;
+    border-radius: var(--border-width);
+
+    &::after {
+        position: absolute;
+        content: "";
+        top: calc(-1 * var(--border-width));
+        left: calc(-1 * var(--border-width));
+        z-index: -1;
+        width: calc(100% + var(--border-width) * 2);
+        height: calc(100% + var(--border-width) * 2);
+        background: linear-gradient(60deg,
+                hsl(224, 85%, 66%),
+                hsl(269, 85%, 66%),
+                hsl(314, 85%, 66%),
+                hsl(359, 85%, 66%),
+                hsl(44, 85%, 66%),
+                hsl(89, 85%, 66%),
+                hsl(134, 85%, 66%),
+                hsl(179, 85%, 66%));
+        background-size: 300% 300%;
+        background-position: 0 50%;
+        border-radius: calc(2 * var(--border-width));
+        animation: moveGradient 4s alternate infinite;
+    }
+    @keyframes moveGradient {
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+}
+
+//====== /Миксинчики ======
+
+
+
+// Main style
+.wrapper {
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1440px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+body{
+    background-color: $color1;
+    color: #fff;
+    //font-size: 2em;
+    min-height: 100%;
+    //font-family: digital-7;
+    font-weight: 400;
+    //font-size: 20px;
+}
+
+
+
+
+.timer {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer-body {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 1000px;
+    background-color: $color2;
+    border-radius: 40px;
+    //border: 5px solid $color5;
+    @include border-animation;
+}
+
+.timer-timelist {
+
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 25px;
+    &-time {
+        flex: 3 1 auto;//3 1
+    }
+
+    &-list {
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        flex: 2 1 auto;//2 1
+
+        height: 615px;
+        width: 100px;
+
+        background-color: $color3;
+        //box-shadow: 0px 0px 48px 27px rgba(170, 170, 170, 0.24) inset;
+        padding: 10px;
+        border-radius: 10px;
+        border: 2px solid $color6;
+
+        //custom scrollbar
+
+
+
+        &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+            border-radius: 10px;
+            background-color: #f1f1f1;
+        }
+
+        &::-webkit-scrollbar {
+            width: 12px;
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+            background-color: #8b8b8b;
+        }
+
+        
+        
+        &__item{
+            background-color: $color4;
+            width: 100%;
+            // height: 50px;
+            height: 10%;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            padding: 5px;
+            font-size: max(3.5vmin, 30px);
+            font-family: "digital-7 (mono)";
+
+            border: 2px solid $color6;
+            
+            &:last-child{   
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+
+
+.lowercase{
+    font-size: max(1.75vmin, 16px);
+}
+
+
+
+
+@media (max-width: 700px) {
+
+    .timer-timelist {
+
+            flex-direction: column;
+    
+            &-time {
+                flex: 3 1 auto; //3 1
+            }
+    
+            &-list {
+                height: 415px;
+                width: 100%;
+
+
+                // &__item {
+                //         font-size: 30px;
+                // }
+            }
+        }
+
+}
+
+@media (max-width: 900px) {
+
+    .timer-timelist {
+        &-list {
+            height: 515px;
+        }
+    }
+
+}
+
+
+
+
+
+.clock {
+    position: relative;
+    background-color: $color3;
+    border-radius: 50%;
+    border: 2px solid $color6;
+
+    padding: 10px;
+
+    // width: 650px;
+    // height: 650px;
+}
+
+.clock-spinner {
+    width: 100%;
+    height: 100%;
+    //display: none;
+}
+
+
+.clock-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__time {}
+}
+
+.clock-svg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+#timer{
+    //font-size: 15vmin;
+    //font-size: min(100px, 350%);
+
+    font-size: max(10vmin, 50px);
+    font-family: "digital-7 (mono)";
+
+    
+
+    //font-size: 10vh;
+}
+
+#mtimer {
+    //font-size: 50px;
+    // font-size: min(50px, 175%);
+
+    font-size: max(5vmin, 25px);
+    font-family: "digital-7 (mono)";
+}
+
+
+
+
+@media (min-width: 1300px) {
+    
+    #timer {
+            font-size: 100px;
+        }
+    
+    #mtimer {
+        font-size: 50px;
+    }
+
+}
+
+
+
+
+
+
+
+
+.timer-buttons {
+    background-color: #838383;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px solid $color6;
+    
+    &__reload {}
+
+    &__startstop {}
+
+    &__loop {}
+}
+
+.button{
+    height:100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 2px solid $color6;
+    background-color: #e0e0e0;
+    font-size: 1.5rem;
+    //border: solid 2px #D22730;
+
+
+
+    --border-width: 50px;
+    
+    position: relative;
+    border-radius: var(--border-width);
+
+    &::after {
+        position: absolute;
+        content: "";
+        top: calc(-1 * var(--border-width));
+        left: calc(-1 * var(--border-width));
+        z-index: -1;
+        width: calc(100% + var(--border-width) * 2);
+        height: calc(100% + var(--border-width) * 2);
+        background: linear-gradient(60deg,
+                hsl(224, 85%, 66%),
+                hsl(269, 85%, 66%),
+                hsl(314, 85%, 66%),
+                hsl(359, 85%, 66%),
+                hsl(44, 85%, 66%),
+                hsl(89, 85%, 66%),
+                hsl(134, 85%, 66%),
+                hsl(179, 85%, 66%));
+        background-size: 300% 300%;
+        background-position: 0 50%;
+        border-radius: calc(2 * var(--border-width));
+        animation: moveGradient 4s alternate infinite;
+    }
+
+    @keyframes moveGradient {
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+
+    //@include border-animation-withGenerator;
+}
+
+
+
+@media (max-width: 700px) {
+
+    .button {
+            height: 150px;
+            width:  150px;
+            font-size: 2rem;
+        }
+
+}
+
+
+
+
+
+//==============
+
+
+
+//====== Анимация спинера ======//
+
+
+// .clock-spinner circle {
+//     stroke-width: 2;
+//     fill: none;
+//     stroke-dasharray: 616;//616
+//     animation: efecto 3s linear infinite;
+//     transform-origin: center center;
+// }
+
+.anim{
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 616; //616
+    animation: efecto 3s linear infinite;
+    transform-origin: center center;
+    animation-play-state: paused;
+}
+.StopAnim{
+    display: none;
+}
+
+@keyframes efecto {
+    from {
+        stroke-dashoffset: 616;
+        transform: rotateZ(-90deg);
+        stroke: #c08af9;
+    }
+
+    50% {
+        transform: rotateZ(-90deg);
+        stroke: #c08af9;
+        stroke-dashoffset: 0;
+
+    }
+
+    50.0001% {
+        transform: rotateZ(-90deg) rotateX(180deg);
+        stroke: #c08af9;
+    }
+
+    to {
+        transform: rotateZ(-90deg) rotateX(180deg);
+        stroke: #c08af9;
+        stroke-dashoffset: 616;
+    }
+}
+//====== Анимация спинера ======//
+
+
+
+
+
+
+
+
+
+.point {
+    position: absolute;
+    width: 0px;  // Чтобы вернуть не адаптируемые точки поставь 6 px
+    height: 0px; // Чтобы вернуть не адаптируемые точки поставь 6 px
+    top: 110px;
+    left: 110px;
+    background: white;
+    border-radius: 50%;
+    transform-origin: 195px 195px;
+}
+
+
+
+@media (max-width: 900px){
+    .point {
+            top:  95px;
+            left: 95px;
+            transform-origin: 175px 175px;
+        }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//========== Анимация волны на кнопках ==========//
+
+.btn-wave {
+    overflow: hidden;
+    position: relative;
+}
+
+.pulse {
+    border-radius: 50%;
+    background-color: #bfc9e7;
+    animation: pulse 0.7s ease-out;
+    transform: scale(0);
+    position: absolute;
+}
+
+@keyframes pulse {
+    to {
+        transform: scale(2);
+        background-color: #fff;
+        opacity: 0;
+    }
+}
+
+//========== /Анимация волны на кнопках ==========//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//========== Стили для элементов "Круг" ==========//
+
+
+
+//========== /Стили для элементов "Круг" ==========//
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .timer-body {
+//     --border-width: 3px;
+
+//     position: relative;
+//     border-radius: var(--border-width);
+
+//     &::after {
+//         position: absolute;
+//         content: "";
+//         top: calc(-1 * var(--border-width));
+//         left: calc(-1 * var(--border-width));
+//         z-index: -1;
+//         width: calc(100% + var(--border-width) * 2);
+//         height: calc(100% + var(--border-width) * 2);
+//         background: linear-gradient(60deg,
+//                 hsl(224, 85%, 66%),
+//                 hsl(269, 85%, 66%),
+//                 hsl(314, 85%, 66%),
+//                 hsl(359, 85%, 66%),
+//                 hsl(44, 85%, 66%),
+//                 hsl(89, 85%, 66%),
+//                 hsl(134, 85%, 66%),
+//                 hsl(179, 85%, 66%));
+//         background-size: 300% 300%;
+//         background-position: 0 50%;
+//         border-radius: calc(2 * var(--border-width));
+//         animation: moveGradient 4s alternate infinite;
+//     }
+// }
+
+// @keyframes moveGradient {
+//     50% {
+//         background-position: 100% 50%;
+//     }
+// }

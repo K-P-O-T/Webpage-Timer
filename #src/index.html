@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.min.css">
+    <title>Timer</title>
+</head>
+<body>
+    @@include('_header.html')
+    <div class="wrapper">
+
+
+
+        <section class="timer">
+
+
+            <div class="timer-body">
+
+                <div class="timer-timelist">
+                    <div class="timer-timelist-time">
+                        <div class="clock">
+                            <svg class='clock-spinner' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'>
+                                <circle class="anim" cx='100' cy='100' r='98'></circle>
+                            </svg>
+                            <div class="clock-info">
+                                <div class="clock-info__time">
+                                    <span id="timer">00:00:00</span><span id="mtimer">.00</span>
+                                </div>
+                            </div>
+                            <!-- <img class="clock-svg" src="img/34139.svg" alt=""> -->
+                            <!-- svg вместо точек -->
+                        </div>
+                    </div>
+                    <div class="timer-timelist-list">
+                        <!-- <div class="timer-timelist-list__item"></div> -->
+                    </div>
+                </div>
+                <div class="timer-buttons">
+                    <button class="button btn-wave timer-buttons__reload">reload</button>
+                    <button class="button btn-wave timer-buttons__startstop">start</button>
+                    <button class="button btn-wave timer-buttons__loop">loop</button>
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+    </div>
+    <script src="js/script.min.js"></script>
+</body>
+</html>
+
