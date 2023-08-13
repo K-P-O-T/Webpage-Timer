@@ -29,7 +29,7 @@
 const reload_btn = document.querySelector('.timer-buttons__reload');
 const startstop_btn = document.querySelector('.timer-buttons__startstop');
 const loop_btn = document.querySelector('.timer-buttons__loop');
-const loopcontainer = document.querySelector('.timer-timelist-list');
+const loopcontainer = document.querySelector(".timer__timelist-list");
 const anim = document.querySelector('.anim');
 
 let hour = 0;
@@ -251,12 +251,12 @@ function addLoopItem() {
     let loopdiv = document.createElement('div');
     
     
-    loopdiv.className = "timer-timelist-list__item";
+    loopdiv.className = "timer-list__item";
     
     
     // loopdiv.innerHTML = timer.innerHTML + mtimer.innerHTML;
 
-    loopdiv.innerHTML = "<span>" + timer.innerHTML + "</span><span class='lowercase'>" + mtimer.innerHTML + "</span>";
+    loopdiv.innerHTML = "<span class='upercase'>" + timer.innerHTML + "</span><span class='lowercase'>" + mtimer.innerHTML + "</span>";
     
     
     loopcontainer.prepend(loopdiv);
@@ -482,9 +482,9 @@ function addElement(e) {
 //======Адаптив часов через JS======
 
 
-const clock = document.querySelector('.clock ');
+// const clock = document.querySelector('.clock ');
 
-timer.style.cssText = 'font-size: ' + clock.offsetWidth; +'px;';
+// timer.style.cssText = 'font-size: ' + clock.offsetWidth; +'px;';
 
 
 //======/Адаптив часов через JS======
