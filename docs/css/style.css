@@ -140,11 +140,43 @@ body {
 .timer-body {
   padding: 25px;
   background-color: #929292;
+  --border-width: 10px;
+  position: relative;
+  border-radius: var(--border-width);
   display: grid;
   grid-template-columns: 7fr 5fr;
   grid-template-rows: 8fr 2fr;
   gap: 25px;
   grid-template-areas: "time list" "buttons buttons";
+}
+
+.timer-body::after {
+  position: absolute;
+  content: "";
+  top: calc(-1 * var(--border-width));
+  left: calc(-1 * var(--border-width));
+  z-index: -1;
+  width: calc(100% + var(--border-width) * 2);
+  height: calc(100% + var(--border-width) * 2);
+  background: -o-linear-gradient(30deg, hsl(224deg, 85%, 66%), hsl(269deg, 85%, 66%), hsl(314deg, 85%, 66%), hsl(359deg, 85%, 66%), hsl(44deg, 85%, 66%), hsl(89deg, 85%, 66%), hsl(134deg, 85%, 66%), hsl(179deg, 85%, 66%));
+  background: linear-gradient(60deg, hsl(224deg, 85%, 66%), hsl(269deg, 85%, 66%), hsl(314deg, 85%, 66%), hsl(359deg, 85%, 66%), hsl(44deg, 85%, 66%), hsl(89deg, 85%, 66%), hsl(134deg, 85%, 66%), hsl(179deg, 85%, 66%));
+  background-size: 300% 300%;
+  background-position: 0 50%;
+  border-radius: calc(2 * var(--border-width));
+  -webkit-animation: moveGradient 4s alternate infinite;
+          animation: moveGradient 4s alternate infinite;
+}
+
+@-webkit-keyframes moveGradient {
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes moveGradient {
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .timer-time {

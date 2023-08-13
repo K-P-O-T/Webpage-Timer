@@ -93,6 +93,7 @@ body {
 .timer-body {
     padding: 25px;
     background-color: $color2;
+    @include border-animation;
 
     display: grid;
 
