@@ -132,9 +132,18 @@ h6 {
 
 /*--------------------*/
 
-.wrapper {
+body {
+  background-color: #202124;
+  color: #fff;
+  min-height: 100%;
+  font-size: 16px;
+  font-family: "digital-7 (mono)";
   overflow: hidden;
+}
+
+.wrapper {
   min-height: 100vh;
+  min-width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -144,21 +153,11 @@ h6 {
           flex-direction: column;
 }
 
-.container {
-  max-width: 1440px;
+.timer {
+  max-width: 1640px;
   padding: 0 20px;
   margin: 0 auto;
-}
-
-body {
-  background-color: #202124;
-  color: #fff;
-  min-height: 100%;
-  font-weight: 400;
-}
-
-.timer {
-  height: 100vh;
+  padding: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -168,6 +167,8 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  min-height: 100vh;
+  width: 100%;
 }
 
 .timer-body {
@@ -178,10 +179,9 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 15px;
-  width: 1000px;
+  gap: 25px;
+  padding: 25px;
   background-color: #929292;
-  border-radius: 40px;
   --border-width: 10px;
   position: relative;
   border-radius: var(--border-width);
@@ -217,31 +217,19 @@ body {
 }
 
 .timer-timelist {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  gap: 20px;
-  padding: 25px;
-}
-
-.timer-timelist-time {
-  -webkit-box-flex: 3;
-      -ms-flex: 3 1 auto;
-          flex: 3 1 auto;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 25px;
 }
 
 .timer-timelist-list {
   overflow-x: hidden;
   overflow-y: auto;
-  -webkit-box-flex: 2;
-      -ms-flex: 2 1 auto;
-          flex: 2 1 auto;
   height: 615px;
-  width: 100px;
+  width: 400px;
   background-color: #acacac;
   padding: 10px;
   border-radius: 10px;
@@ -270,21 +258,15 @@ body {
 .timer-timelist-list__item {
   background-color: #b9b9b9;
   width: 100%;
-  height: 10%;
   border-radius: 10px;
   margin-bottom: 5px;
-  padding: 5px;
+  padding: 10px;
   font-size: max(3.5vmin, 30px);
-  font-family: "digital-7 (mono)";
   border: 2px solid #ffffff;
 }
 
 .timer-timelist-list__item:last-child {
   margin-bottom: 0px;
-}
-
-.lowercase {
-  font-size: max(1.75vmin, 16px);
 }
 
 .clock {
@@ -307,8 +289,6 @@ body {
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -329,13 +309,11 @@ body {
 }
 
 #timer {
-  font-size: max(10vmin, 50px);
-  font-family: "digital-7 (mono)";
+  font-size: clamp(3rem, 6vw, 7rem);
 }
 
 #mtimer {
-  font-size: max(5vmin, 25px);
-  font-family: "digital-7 (mono)";
+  font-size: clamp(1.5rem, 3vw, 4rem);
 }
 
 .timer-buttons {
@@ -363,32 +341,10 @@ body {
   border: 2px solid #ffffff;
   background-color: #e0e0e0;
   font-size: 1.5rem;
-  --border-width: 50px;
-  position: relative;
-  border-radius: var(--border-width);
 }
 
-.button::after {
-  position: absolute;
-  content: "";
-  top: calc(-1 * var(--border-width));
-  left: calc(-1 * var(--border-width));
-  z-index: -1;
-  width: calc(100% + var(--border-width) * 2);
-  height: calc(100% + var(--border-width) * 2);
-  background: -o-linear-gradient(30deg, hsl(224deg, 85%, 66%), hsl(269deg, 85%, 66%), hsl(314deg, 85%, 66%), hsl(359deg, 85%, 66%), hsl(44deg, 85%, 66%), hsl(89deg, 85%, 66%), hsl(134deg, 85%, 66%), hsl(179deg, 85%, 66%));
-  background: linear-gradient(60deg, hsl(224deg, 85%, 66%), hsl(269deg, 85%, 66%), hsl(314deg, 85%, 66%), hsl(359deg, 85%, 66%), hsl(44deg, 85%, 66%), hsl(89deg, 85%, 66%), hsl(134deg, 85%, 66%), hsl(179deg, 85%, 66%));
-  background-size: 300% 300%;
-  background-position: 0 50%;
-  border-radius: calc(2 * var(--border-width));
-  -webkit-animation: moveGradient 4s alternate infinite;
-          animation: moveGradient 4s alternate infinite;
-}
-
-@keyframes moveGradient {
-  50% {
-    background-position: 100% 50%;
-  }
+.lowercase {
+  font-size: 14px;
 }
 
 .anim {
@@ -513,52 +469,62 @@ body {
   }
 }
 
-@media (min-width: 1300px) {
-  #timer {
-    font-size: 100px;
-  }
-
-  #mtimer {
-    font-size: 50px;
-  }
-}
-
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .timer-timelist-list {
-    height: 515px;
-  }
-
-  .point {
-    top: 95px;
-    left: 95px;
-    -webkit-transform-origin: 175px 175px;
-        -ms-transform-origin: 175px 175px;
-            transform-origin: 175px 175px;
+    height: 450px;
+    width: 300px;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .timer-timelist {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    gap: 20px;
   }
 
   .timer-timelist-time {
-    -webkit-box-flex: 3;
-        -ms-flex: 3 1 auto;
-            flex: 3 1 auto;
+    height: 250px;
+    width: 250px;
   }
 
   .timer-timelist-list {
-    height: 415px;
+    height: 200px;
     width: 100%;
   }
 
+  .timer-body {
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .timer-buttons {
+    gap: 20px;
+  }
+
   .button {
-    height: 150px;
-    width: 150px;
-    font-size: 2rem;
+    height: 75px;
+    width: 75px;
+  }
+}
+
+@media (max-width: 425px) {
+  .timer-body {
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .timer-buttons {
+    gap: 15px;
+  }
+
+  .button {
+    height: 75px;
+    width: 75px;
   }
 }
